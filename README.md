@@ -4,6 +4,7 @@
   - [Dependancy Setup NodeJS](#dependancy-setup-nodejs)
   - [Dependancy Setup TypeScript](#dependancy-setup-typescript)
 - [Typescript Compilation](#typescript-compilation)
+  - [Choose Compilation with Include and Exclude](#choose-compilation-with-include-and-exclude)
 - [Function](#function)
   - [Define a Function](#define-a-function)
 - [Tests](#tests)
@@ -53,6 +54,12 @@ npx tsc
 and programmers usually divide for compile typescript into folder ``dist`` (distributor). it doing for dist folder cannot include into git commit. we can change folder for save file compilation in ``tsconfig.json``. you can change on ``"outDir"``.
 ```json
 "outDir": "dist/",
+```
+## Choose Compilation with Include and Exclude
+if you want to choose one folder for Include to Compile or you dont want to compile you can add this to ``tsconfig.json``
+```json
+"include":["src/**/*"],
+"exclude":["tests/**/*"]
 ```
 
 <br/>
