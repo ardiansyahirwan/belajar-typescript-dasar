@@ -4,11 +4,17 @@
   - [Dependancy Setup NodeJS](#dependancy-setup-nodejs)
   - [Dependancy Setup TypeScript](#dependancy-setup-typescript)
 - [Typescript Compilation](#typescript-compilation)
+  - [Important thing compile with Bable Typescript](#important-thing-compile-with-bable-typescript)
   - [Choose Compilation with Include and Exclude](#choose-compilation-with-include-and-exclude)
+- [Variable Declaration](#variable-declaration)
+  - [Primitive Data Type](#primitive-data-type)
+  - [Array Data Type](#array-data-type)
+    - [Readonly Array](#readonly-array)
 - [Function](#function)
   - [Define a Function](#define-a-function)
 - [Tests](#tests)
   - [Function Test](#function-test)
+  - [Declare Variable test](#declare-variable-test)
 
 <br/>
 <br/>
@@ -55,11 +61,55 @@ and programmers usually divide for compile typescript into folder ``dist`` (dist
 ```json
 "outDir": "dist/",
 ```
+## Important thing compile with Bable Typescript
+sometimes bable typescript ignore javascipt code in TS file, in a time we should check with ``npx tsc`` for checking compile have error or not. but it wasted time to do. for checking in a time after time you can use 
+```bash
+npx tsc --watch
+```
+and for end this command you can use ``CTRL + C``
 ## Choose Compilation with Include and Exclude
 if you want to choose one folder for Include to Compile or you dont want to compile you can add this to ``tsconfig.json``
 ```json
 "include":["src/**/*"],
 "exclude":["tests/**/*"]
+```
+
+<br/>
+<br/>
+
+# Variable Declaration
+TS it a Strongly Type variable, it means that you should declare variable type like string or etc. If variable was declare, it cant change except you change in first declaration variable. TS support for Primitive Data type.
+```typescript
+const name:string = 'Angga';
+const price:number = 20000;
+const isCheap:boolean = false;
+
+console.info(name);
+console.info(price);
+console.info(isCheap);
+```
+## Primitive Data Type
+example :
+```typescript
+const name = 'Angga';
+const price = 20000;
+const isCheap = false;
+
+console.info(name);
+console.info(price);
+console.info(isCheap);
+```
+## Array Data Type
+array in JS and TS probably almost same, in TS you should declare type data of array, example:
+```typescript
+const summary:number[] = [10,20,30];
+console.info(summary);
+```
+### Readonly Array
+you can make array in TS with ReadOnlyArray, it means data on array in TS cannot Change
+```typescript
+const summary:ReadonlyArray<number> = [9,9,9];
+console.info(summary);
 ```
 
 <br/>
@@ -98,5 +148,20 @@ describe( 'test for sayHello function', () => {
    } );
 
 } );
+```
+## Declare Variable test
+this test for [Variable Declaration](#variable-declaration) section:
+```javascript
+describe( 'test Declare variable on TS', () => {
+   it( 'should declare', () => {
+      const name:string = 'Angga';
+      const price:number = 20000;
+      const isCheap:boolean = false;
 
+      console.info(name);
+      console.info(price);
+      console.info(isCheap);
+   } );
+
+} );
 ```
