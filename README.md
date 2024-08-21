@@ -10,11 +10,16 @@
   - [Primitive Data Type](#primitive-data-type)
   - [Array Data Type](#array-data-type)
     - [Readonly Array](#readonly-array)
+    - [Tuple](#tuple)
+  - [Any Data Type](#any-data-type)
+  - [Union Data Type](#union-data-type)
+  - [Alias Data Type](#alias-data-type)
 - [Function](#function)
   - [Define a Function](#define-a-function)
 - [Tests](#tests)
   - [Function Test](#function-test)
   - [Declare Variable test](#declare-variable-test)
+  - [Alias Test](#alias-test)
 
 <br/>
 <br/>
@@ -99,6 +104,9 @@ console.info(name);
 console.info(price);
 console.info(isCheap);
 ```
+<br/>
+<br/>
+
 ## Array Data Type
 array in JS and TS probably almost same, in TS you should declare type data of array, example:
 ```typescript
@@ -111,7 +119,62 @@ you can make array in TS with ReadOnlyArray, it means data on array in TS cannot
 const summary:ReadonlyArray<number> = [9,9,9];
 console.info(summary);
 ```
+### Tuple
+Tuple is array when data is readonly and was set.
+```typescript
+const summary: readonly [ number, number, number ] = [ 9, 9, 9 ];
+console.info(summary);
+```
+<br/>
+<br/>
 
+## Any Data Type
+``any data type`` using for declare data with anything data type, TS not recommeded this. because if you want to do this, you better use javascript. but if is urgent, you can declare with ``any data type``
+```typescript
+const person:any = {
+   name:"Angga",
+   age:17
+};
+console.info(person.age);
+```
+Usually Any data type using for declare variable from library, when it was safe and cant change. and any was use for attribute when value is not pasti.
+<br/>
+<br/>
+
+## Union Data Type
+Union is used for declare variable with can change, but type data was set when declare.
+```typescript
+let price:string|number=2000;
+price="dua ribu";
+console.info(price);
+```
+if you want to use ``union data type`` better you have to making decision for checking using ``typeof()``.
+```typescript
+let price:string|number=2000;
+price="dua ribu";
+
+if ( typeof(price) === "string" ){
+   return price.toUpperCase();
+} else {
+   return price * 2;
+}
+```
+<br/>
+<br/>
+
+## Alias Data Type
+Alias data type use for declare object variable when we know how structure data is. usually Alias use ``type`` for declare variable.
+```typescript
+export type Category = {
+   id : string;
+   name: string;
+}
+export type Product = {
+   id: string;
+   name: string;
+   category: Category;
+}
+```
 <br/>
 <br/>
 
@@ -165,3 +228,25 @@ describe( 'test Declare variable on TS', () => {
 
 } );
 ```
+## Alias Test
+this test for [Alias Data Type](#alias-data-type) section.
+```typescript
+import { Category, Product } from "../src/alias";
+
+describe( 'Alias data type', () => {
+   it( 'should alias', () => {
+      const category: Category = {
+         id: "1",
+         name: "Food"
+      }
+
+      const product: Product = {
+         id: "2",
+         name: "Indomie",
+         category: category
+      }
+   } );
+
+} );
+
+``` 
