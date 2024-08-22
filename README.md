@@ -14,12 +14,25 @@
   - [Any Data Type](#any-data-type)
   - [Union Data Type](#union-data-type)
   - [Alias Data Type](#alias-data-type)
+    - [Aliases Type Union](#aliases-type-union)
+  - [Object Data Type](#object-data-type)
+  - [Enum Data Type](#enum-data-type)
+- [Optional Properties](#optional-properties)
+  - [Null and undefined](#null-and-undefined)
+- [Interface](#interface)
+  - [Readonly Interface properties](#readonly-interface-properties)
+  - [Function Interface](#function-interface)
+  - [Indexable Interface](#indexable-interface)
+  - [Dictionary Interface](#dictionary-interface)
+  - [Extending Interface](#extending-interface)
 - [Function](#function)
   - [Define a Function](#define-a-function)
 - [Tests](#tests)
   - [Function Test](#function-test)
   - [Declare Variable test](#declare-variable-test)
   - [Alias Test](#alias-test)
+  - [Enum DataType](#enum-datatype)
+  - [Function Interface Test](#function-interface-test)
 
 <br/>
 <br/>
@@ -175,6 +188,150 @@ export type Product = {
    category: Category;
 }
 ```
+### Aliases Type Union
+```typescript
+export type Id = string|number;
+
+export type Category = {
+   id : Id;
+   name: string;
+}
+export type Product = {
+   id: Id;
+   name: string;
+   category: Category;
+}
+```
+<br/>
+<br/>
+
+## Object Data Type
+object type use for compile with result object in javascript in a simple developemnt. if record have a more variable, it good for use [Alias](#alias-data-type).
+```typescript
+const product:{id:string, name:string} = {
+   id:"1",
+   name:"Samyang"
+}
+```
+## Enum Data Type
+enum datatype is a data type when value attribute on data type was known. user just choose value on enum. enum usually declare with keyword ``enum``
+```typescript
+export enum AnimalType {
+   DOG,
+   RABBIT,
+   CAT,
+}
+
+export type Animal = {
+   id:number;
+   name:string;
+   type:AnimalType;
+}
+```
+<br/>
+<br/>
+
+# Optional Properties
+optional properties is a properties is not should include. it can be optional
+example from [Alias](#alias-data-type). this code will update with using optional attribute.
+```typescript
+ export type Category = {
+   id : string;
+   name: string;
+}
+export type Product = {
+   id: string;
+   name: string;
+   category: Category;
+   description?:string;
+}
+```
+<br/>
+<br/>
+
+## Null and undefined
+```typescript
+const name:string | null = "budi";
+if (name === "budi"){
+   return console.info("ini string")
+} else {
+   return console.info("ini null")
+}
+```
+
+<br/>
+<br/>
+
+# Interface
+for complex atribut, dibanding using type [alias](#alias-data-type) more programmer using ``interface`` for declare attribut:
+```typescript
+export interface Product {
+   id:number;
+   name:string;
+   description?:string;
+}
+```
+## Readonly Interface properties
+```typescript
+export interface Product {
+   id:number;
+   name:string;
+   readonly price:number;
+   description?:string;
+}
+```
+## Function Interface
+```typescript
+export interface TotalPrice {
+   ( quantity: number, price: number ): number;
+}
+
+const getTotalPrice: TotalPrice = ( quantity: number, price: number ): number => {
+    return price * quantity;
+}
+```
+## Indexable Interface
+in interface we can declare array with indexes.
+```typescript
+interface StringArray {
+   [index:number]:string
+}
+
+const name:StringArray = ["get","put","delete"];
+console.info(name);
+```
+## Dictionary Interface
+```typescript
+interface StringDictionary {
+   [key:string]:string
+}
+
+const names:StringDictionary = {
+   name: "budi",
+   fullname:"sasono"
+};
+console.info(names["name"]);
+```
+## Extending Interface
+Interface can inherit extending interface, and can use attribute interface were extended
+```typescript
+export interface Employee {
+   id: number;
+   name: string;
+   address: string;
+}
+
+export interface Manager extends Employee {
+   division: string;
+}
+
+ const manager: Manager = {
+         id: 1,
+         name: "budi",
+         address: "depok",
+         division: "IT"
+      }
+```
 <br/>
 <br/>
 
@@ -250,3 +407,35 @@ describe( 'Alias data type', () => {
 } );
 
 ``` 
+## Enum DataType
+this test for [Enum](#enum-data-type)
+```typescript
+import { Animal, AnimalType } from "../src/enum";
+
+describe( 'enum data type', () => {
+   it( 'should enum result', () => {
+      const animal: Animal = {
+         id: 1,
+         name: "halley",
+         type: AnimalType.DOG
+      }
+   } );
+} );
+```
+## Function Interface Test
+this test for [Function Interface](#function-interface)
+```typescript
+import { TotalPrice } from "../src/product-interface";
+
+describe( 'Interface', () => {
+   it( 'can declare', () => {
+      const getTotalPrice: TotalPrice = ( quantity: number, price: number ): number => {
+         return price * quantity;
+      }
+
+      expect( getTotalPrice( 2, 2000 ) ).toBe( 4000 );
+   } );
+
+} );
+
+```
