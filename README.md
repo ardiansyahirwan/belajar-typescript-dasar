@@ -17,6 +17,7 @@
     - [Aliases Type Union](#aliases-type-union)
   - [Object Data Type](#object-data-type)
   - [Enum Data Type](#enum-data-type)
+  - [Assertion Data Types](#assertion-data-types)
 - [Optional Properties](#optional-properties)
   - [Null and undefined](#null-and-undefined)
 - [Interface](#interface)
@@ -25,14 +26,19 @@
   - [Indexable Interface](#indexable-interface)
   - [Dictionary Interface](#dictionary-interface)
   - [Extending Interface](#extending-interface)
+  - [Function in interface](#function-in-interface)
+  - [Intersection Types](#intersection-types)
 - [Function](#function)
   - [Define a Function](#define-a-function)
+  - [Function Parameter](#function-parameter)
+  - [function Overload](#function-overload)
 - [Tests](#tests)
   - [Function Test](#function-test)
   - [Declare Variable test](#declare-variable-test)
   - [Alias Test](#alias-test)
   - [Enum DataType](#enum-datatype)
   - [Function Interface Test](#function-interface-test)
+  - [Function Overloading test](#function-overloading-test)
 
 <br/>
 <br/>
@@ -228,6 +234,22 @@ export type Animal = {
    type:AnimalType;
 }
 ```
+## Assertion Data Types
+sometimes we dont know, what is return value from some function. And we just write ``any`` to return value from function. in this case we can use Assertion data type to coverting data type as we need use keyword ``as``. **We have to make sure for attribute that coverting into data type we want. is a interface have an this attribute or no ?**
+```typescript
+type Animal = {
+   id:number;
+   name: string;
+}
+
+const dog:any={
+   id:2,
+   name:"doggy"
+}
+// we want to change data type of dog to type Animal
+
+const dogNew:Animal = dog as Animal;
+```
 <br/>
 <br/>
 
@@ -332,6 +354,45 @@ export interface Manager extends Employee {
          division: "IT"
       }
 ```
+## Function in interface
+you can define function in interface,
+```typescript
+interface Person {
+   name:string;
+   sayHello:(name:string):string;
+}
+
+const person:Person = {
+   name:"Irwan",
+   sayHello:(name:string):string => {
+      return "Hello ${name}, My name is ${this.name}";
+   }
+}
+
+console.info(person.sayHello("Black"))
+```
+## Intersection Types
+is a how to make new data types by merge two interface. for make Intersection Types we can use ``&``. If you have extends interface, and not adding attribute. there is good to use Intersection types than extends to interfaces
+```typescript
+interface Employee {
+   id: number;
+   name: string;
+   address: string;
+}
+
+interface Manager extends Employee {
+   division: string;
+}
+// dibanding harus extends employee dan manager
+type Spv = Employee & Manager ;
+const spv:Spv = {
+   id:2,
+   name:"Angga",
+   address:"cibinong",
+   division: "IT"
+}
+```
+
 <br/>
 <br/>
 
@@ -344,6 +405,15 @@ export function sayHello(name: String):String{
    return `Hello ${name}`;
 }
 ```
+## Function Parameter
+Function parameter in TS same with JS. Typescript support for Function parameter, Rest Parameter (with Argument), default option. different part from TS is Parameter in TS function are required, except you declare optional properties use keyword ``?``.
+```typescript
+export function sayHello(name: string, age?:number):string{
+   return age?`Hello ${name},I am ${age} years old`:`Hello ${name}`;
+}
+```
+## function Overload
+Is a function can accepts different kinds Arguments.
 <br/>
 <br/>
 
@@ -437,5 +507,28 @@ describe( 'Interface', () => {
    } );
 
 } );
+
+```
+## Function Overloading test
+this test for [Function overloading](#function-overload)
+```typescript
+it( 'should overloading functions', () => {
+      function getNumber( numberTelp: string ): string;
+      function getNumber( numberTelp: number ): number;
+      function getNumber( numberTelp: any ) {
+         if ( typeof numberTelp === "string" ) {
+            return numberTelp.toUpperCase();
+         }
+         else if ( typeof numberTelp === "number" ) {
+            return numberTelp.toString();
+         }
+         else {
+            return numberTelp;
+         }
+
+         expect( getNumber( 10 ) ).toBe( "10" );
+         expect( getNumber( "di" ) ).toBe( "DI" );
+      }
+   } );
 
 ```
