@@ -26,6 +26,9 @@
   - [Switch statement](#switch-statement)
 - [Looping](#looping)
   - [For Loop](#for-loop)
+  - [While Loop](#while-loop)
+  - [Do While Loop](#do-while-loop)
+  - [Break and Continue](#break-and-continue)
 - [Interface](#interface)
   - [Readonly Interface properties](#readonly-interface-properties)
   - [Function Interface](#function-interface)
@@ -330,6 +333,14 @@ for(const student of students){
    console.log(student);
 }
 ```
+## While Loop
+Same with javascript, while statement true , block code will run 
+
+## Do While Loop
+same with javascript
+
+## Break and Continue
+same with javascript, it doing when we use looping. break use for breaked loop. and continue use for continue looping
 <br/>
 <br/>
 
