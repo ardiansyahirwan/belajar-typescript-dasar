@@ -20,6 +20,12 @@
   - [Assertion Data Types](#assertion-data-types)
 - [Optional Properties](#optional-properties)
   - [Null and undefined](#null-and-undefined)
+- [Decision Making](#decision-making)
+  - [If Statement](#if-statement)
+  - [Ternary Operator](#ternary-operator)
+  - [Switch statement](#switch-statement)
+- [Looping](#looping)
+  - [For Loop](#for-loop)
 - [Interface](#interface)
   - [Readonly Interface properties](#readonly-interface-properties)
   - [Function Interface](#function-interface)
@@ -32,6 +38,9 @@
   - [Define a Function](#define-a-function)
   - [Function Parameter](#function-parameter)
   - [function Overload](#function-overload)
+  - [Function as Parameter](#function-as-parameter)
+  - [Anonymous Function as Parameter](#anonymous-function-as-parameter)
+  - [Arrow Function as Parameter](#arrow-function-as-parameter)
 - [Tests](#tests)
   - [Function Test](#function-test)
   - [Declare Variable test](#declare-variable-test)
@@ -284,6 +293,46 @@ if (name === "budi"){
 <br/>
 <br/>
 
+# Decision Making
+it how you to making decision with ``if else, switch case``
+## If Statement
+same with javascript
+
+## Ternary Operator
+same with javascript
+```typescript
+let value = 90;
+const desc = value < 70 ? "tidak lulus" : "lulus";
+```
+
+## Switch statement
+same with javascript
+<br/>
+<br/>
+
+# Looping
+## For Loop
+TS support for all ``for`` loop, like ``forIn`` ``forOf``
+```typescript
+const students = ["Mimi", "Momo", "Meme"];
+
+for(let i = 0; i < students.length();i++){
+   console.log(students[i]);
+}
+
+// for in
+for(const index in students){
+   console.log(students[index]);
+}
+
+// for of
+for(const student of students){
+   console.log(student);
+}
+```
+<br/>
+<br/>
+
 # Interface
 for complex atribut, dibanding using type [alias](#alias-data-type) more programmer using ``interface`` for declare attribut:
 ```typescript
@@ -413,7 +462,35 @@ export function sayHello(name: string, age?:number):string{
 }
 ```
 ## function Overload
-Is a function can accepts different kinds Arguments.
+Is a function can accepts different kinds Arguments. lest check [Function Overloading test](#function-overloading-test).
+## Function as Parameter
+function can be as parameter like in javascript.
+```typescript
+function sayHello(name:string, greet:(name:string)=>string):string {
+   return `Hello ${greet(name)}`;
+}
+function toUpper(name:string):string{
+   return name.toUpperCase();
+}
+console.info(sayHello('eko',toUpper()));
+```
+## Anonymous Function as Parameter
+```typescript
+function sayHello(name:string, greet:(name:string)=>string):string {
+   return `Hello ${greet(name)}`;
+}
+console.info(sayHello('eko', function(name:string):string {
+   return name.toUpperCase();
+}));
+```
+
+## Arrow Function as Parameter
+```typescript
+function sayHello(name:string, greet:(name:string)=>string):string {
+   return `Hello ${greet(name)}`;
+}
+console.info(sayHello('eko', (name:string):string => name.toUpperCase() ));
+```
 <br/>
 <br/>
 
